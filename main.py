@@ -12,24 +12,17 @@ from scipy.ndimage import (
 
 DEFAULT_SR = 44100
 
+PEAK_NEIGHBORHOOD_SIZE = 20
+
+DEFAULT_AMP_MIN = -50
+
 
 def read_audio(file_path, sr=DEFAULT_SR, duration=10):
     """
     Read an audio file and return up to 10 seconds of audio.
     """
-    y, sr = librosa.load(file_path, sr=sr, duration=duration)
+    y, sr = librosa.load(path=file_path, sr=sr, duration=duration)
     return y, sr
-
-
-def preprocess_audio(y, mono=False):
-    """
-    Preprocess the audio: resample, convert to mono if needed.
-    """
-
-    if mono and y.ndim > 1:
-        y = librosa.to_mono(y)
-
-    return y
 
 
 def create_spectrogram(y, sr, wsize=4096, wratio=0.5, visualize=False):
@@ -37,6 +30,7 @@ def create_spectrogram(y, sr, wsize=4096, wratio=0.5, visualize=False):
     Create a spectrogram using matplotlib's specgram function.
     If visualize is True, display a plot of the spectrogram.
     """
+
     spectrogram, freqs, times = mlab.specgram(
         y, NFFT=wsize, Fs=sr, window=mlab.window_hanning, noverlap=int(wsize * wratio)
     )
@@ -58,37 +52,39 @@ def create_spectrogram(y, sr, wsize=4096, wratio=0.5, visualize=False):
         plt.title("Spectrogram")
         plt.show()
 
-    spectrogram_db[spectrogram_db == -np.inf] = 0
-
     return spectrogram_db, freqs, times
 
 
-def get_2D_peaks(spectrogram, plot=False, amp_min=1):
+def get_2D_peaks(spectrogram, plot=False, amp_min=DEFAULT_AMP_MIN):
     """
     Extract peaks from a 2D array of spectrogram data.
     """
 
     struct = generate_binary_structure(2, 1)
 
-    pad_arr = np.pad(spectrogram, [(1, 1), (1, 1)], mode="constant")
-
-    neighborhood = iterate_structure(struct, 20)
-    local_max = maximum_filter(pad_arr, footprint=neighborhood) == pad_arr
+    neighborhood = iterate_structure(struct, PEAK_NEIGHBORHOOD_SIZE)
+    local_max = maximum_filter(spectrogram, footprint=neighborhood) == spectrogram
 
     # Filter out background
-    background = pad_arr == 0
+    background_threshold = np.percentile(
+        spectrogram, 5
+    )  # les 5% des valeurs les plus basses
+    background = spectrogram <= background_threshold
+
     eroded_background = binary_erosion(
         background, structure=neighborhood, border_value=1
     )
 
     # Identify peaks
     detected_peaks = local_max ^ eroded_background
-    detected_peaks = detected_peaks[1:-1, 1:-1]
 
     # Filter out peaks below amplitude threshold
-    amps = spectrogram[detected_peaks]
     peaks_x, peaks_y = np.where(detected_peaks)
-    peaks = [(x, y) for x, y in zip(peaks_x, peaks_y) if spectrogram[x, y] > amp_min]
+    peaks = [
+        (x, y, spectrogram[x, y])
+        for x, y in zip(peaks_x, peaks_y)
+        if spectrogram[x, y] > amp_min
+    ]
 
     if plot:
         plt.figure(figsize=(12, 8))
@@ -113,27 +109,24 @@ def process_audio_file(file_path, duration=10, visualize=False):
     Process an audio file through all steps to create a fingerprint.
     """
     y, sr = read_audio(file_path, duration=duration)
-    y_processed, sr_processed = preprocess_audio(y), sr
-    spectrogram, freqs, times = create_spectrogram(
-        y_processed, sr_processed, visualize=visualize
-    )
+    spectrogram, freqs, times = create_spectrogram(y, sr, visualize=visualize)
     peaks = get_2D_peaks(spectrogram, plot=visualize)
     fingerprint = create_fingerprint(peaks, freqs, times)
     return fingerprint
 
 
 def main():
-    file_path = "audio/Maylin.mp3"
-    fingerprint = process_audio_file(file_path, duration=10, visualize=False)
+    file_path = "audio/Tant pis.mp3"
+    fingerprint = process_audio_file(file_path, duration=10, visualize=True)
     print(
         colored(
             f"Generated fingerprint with {len(fingerprint)} points.", color="green"
         ),
     )
-    for i, (freq, mag) in enumerate(fingerprint[:5], 1):
+    for i, (freq, time, amp) in enumerate(fingerprint, 1):
         print(
             colored(
-                f"Peak {i}: Frequency = {freq:.2f} Hz, Magnitude = {mag:.2f} dB",
+                f"Peak {i}: Frequency = {freq:.2f} Hz, Magnitude = {amp:.2f} dB",
                 color="yellow",
             )
         )
