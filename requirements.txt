@@ -1,0 +1,4 @@
+librosa
+scipy
+termcolor
+sqlite3

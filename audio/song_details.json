@@ -1,0 +1,82 @@
+{
+    "Bohemian Rhapsody - Queen": {
+        "title": "Bohemian Rhapsody",
+        "artists": "Queen",
+        "album": "A Night at the Opera",
+        "lyrics": "Is this the real life? Is this just fantasy?",
+        "cover": "https://example.com/bohemian_rhapsody_cover.jpg",
+        "url": "https://www.youtube.com/watch?v=fJ9rUzIMcZQ"
+    },
+    "Imagine - John Lennon": {
+        "title": "Imagine",
+        "artists": "John Lennon",
+        "album": "Imagine",
+        "lyrics": "Imagine there's no heaven, it's easy if you try...",
+        "cover": "https://example.com/imagine_cover.jpg",
+        "url": "https://www.youtube.com/watch?v=VOgFZfRVaww"
+    },
+    "Hotel California - Eagles": {
+        "title": "Hotel California",
+        "artists": "Eagles",
+        "album": "Hotel California",
+        "lyrics": "On a dark desert highway, cool wind in my hair...",
+        "cover": "https://example.com/hotel_california_cover.jpg",
+        "url": "https://www.youtube.com/watch?v=BciS5krYL80"
+    },
+    "Billie Jean - Michael Jackson": {
+        "title": "Billie Jean",
+        "artists": "Michael Jackson",
+        "album": "Thriller",
+        "lyrics": "She was more like a beauty queen from a movie scene...",
+        "cover": "https://example.com/billie_jean_cover.jpg",
+        "url": "https://www.youtube.com/watch?v=Zi_XLOBDo_Y"
+    },
+    "Smells Like Teen Spirit - Nirvana": {
+        "title": "Smells Like Teen Spirit",
+        "artists": "Nirvana",
+        "album": "Nevermind",
+        "lyrics": "Load up on guns, bring your friends...",
+        "cover": "https://example.com/smells_like_teen_spirit_cover.jpg",
+        "url": "https://www.youtube.com/watch?v=hTWKbfoikeg"
+    },
+    "Like a Rolling Stone - Bob Dylan": {
+        "title": "Like a Rolling Stone",
+        "artists": "Bob Dylan",
+        "album": "Highway 61 Revisited",
+        "lyrics": "Once upon a time, you dressed so fine...",
+        "cover": "https://example.com/like_a_rolling_stone_cover.jpg",
+        "url": "https://www.youtube.com/watch?v=IwOfCgkyEj0"
+    },
+    "Stairway to Heaven - Led Zeppelin": {
+        "title": "Stairway to Heaven",
+        "artists": "Led Zeppelin",
+        "album": "Led Zeppelin IV",
+        "lyrics": "There's a lady who's sure all that glitters is gold...",
+        "cover": "https://example.com/stairway_to_heaven_cover.jpg",
+        "url": "https://www.youtube.com/watch?v=QkF3oxziUI4"
+    },
+    "Hey Jude - The Beatles": {
+        "title": "Hey Jude",
+        "artists": "The Beatles",
+        "album": "Hey Jude",
+        "lyrics": "Hey Jude, don't make it bad...",
+        "cover": "https://example.com/hey_jude_cover.jpg",
+        "url": "https://www.youtube.com/watch?v=A_MjCqQoLLA"
+    },
+    "Purple Rain - Prince": {
+        "title": "Purple Rain",
+        "artists": "Prince",
+        "album": "Purple Rain",
+        "lyrics": "I never meant to cause you any sorrow...",
+        "cover": "https://example.com/purple_rain_cover.jpg",
+        "url": "https://www.youtube.com/watch?v=347vCib_lMs"
+    },
+    "What's Going On - Marvin Gaye": {
+        "title": "What's Going On",
+        "artists": "Marvin Gaye",
+        "album": "What's Going On",
+        "lyrics": "Mother, mother, there's too many of you crying...",
+        "cover": "https://example.com/whats_going_on_cover.jpg",
+        "url": "https://www.youtube.com/watch?v=o5TmORitlKk"
+    }
+}
