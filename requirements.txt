@@ -1,4 +1,4 @@
 librosa
 scipy
 termcolor
-sqlite3
+psycopg2
