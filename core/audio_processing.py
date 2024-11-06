@@ -151,7 +151,7 @@ def create_fingerprint(
                 if 0 <= time_delta <= 200:
                     # Create a hash string for the pair and append it to the list
                     hash_pair = SongHashPair(
-                        hash=f"{freq1:.2f}|{freq2:.2f}|{time_delta}", offset=time1
+                        hash=f"{freq1:.0f}|{freq2:.0f}|{time_delta:.2f}", offset=time1
                     )
 
                     fingerprint.add_hash_pair(hash_pair)

@@ -1,0 +1,24 @@
+// Tables
+Table artists {
+    id int [pk]
+    name varchar
+    genre varchar
+}
+
+Table albums {
+    id int [pk]
+    title varchar
+    release_date date
+    artist_id int [ref: > artists.id]
+}
+
+Table songs {
+    id int [pk]
+    title varchar
+    duration int
+    album_id int [ref: > albums.id]
+}
+
+// Relations
+Ref: songs.album_id > albums.id
+Ref: albums.artist_id > artists.id
