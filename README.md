@@ -21,10 +21,6 @@ If you find this project interesting, please consider giving it a ⭐ on GitHub.
 1. Add new songs to the database by capturing their audio fingerprint.
 2. Automatically store song fingerprints along with their metadata in the database for future identification.
 
-## Requirements
-
-- Python 3.x (Tested on Python 3.9.6)
-
 ## Setting up and running the project
 
 This app requires Python 3.x.x (tested on 3.9.6) or Docker (which includes the setup for the PostgreSQL database used to store and retrieve audio fingerprints).
