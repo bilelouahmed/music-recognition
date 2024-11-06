@@ -121,7 +121,7 @@ cd music-recognition
 
 Potential future improvements include :
 
-- Enhanced Fingerprint Matching : Implement more robust matching algorithms or consider alternative hashing techniques for increased accuracy.
-- Noise Reduction : Integrate noise filtering techniques to improve performance in noisy environments thanks to Machine Learning.
-- Extended Database Features : Add song metadata and advanced search capabilities for richer song information and recommendations.
-- Performance Optimization : Use optimized data structures and algorithms to handle larger fingerprint databases efficiently.
+- **Enhanced Fingerprint Matching :** Implement more robust matching algorithms or consider alternative hashing techniques for increased accuracy.
+- **Noise Reduction :** Integrate noise filtering techniques to improve performance in noisy environments thanks to Machine Learning.
+- **Extended Database Features :** Add song metadata and advanced search capabilities for richer song information and recommendations.
+- **Performance Optimization :** Use optimized data structures and algorithms to handle larger fingerprint databases efficiently.
