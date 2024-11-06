@@ -90,6 +90,7 @@ cd music-recognition
 
 ## Project Structure
 
+```
 ├── core/
 │   ├── __init__.py                # Initialization file for the core module
 │   ├── audio_capture.py           # Microphone audio capture functionality
@@ -114,7 +115,7 @@ cd music-recognition
 ├── Dockerfile                     # Dockerfile for setting up the app and database container
 ├── docker-compose.yml             # Docker Compose file for container orchestration
 └── database.dbml                  # Database schema file (DBML format)
-
+```
 
 ## Improvements
 
