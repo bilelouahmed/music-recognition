@@ -42,6 +42,9 @@ class SongFingerprint:
         for hash_pair in self.hash_pairs:
             yield hash_pair.get_hash_pair()
 
+    def check_empty(self) -> bool:
+        return len(self.hash_pairs) == 0
+
     def add_hash_pair(self, hash_pair: SongHashPair):
         self.hash_pairs.append(hash_pair)
 

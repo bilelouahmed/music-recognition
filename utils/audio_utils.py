@@ -1,6 +1,7 @@
 from typing import Union
-import librosa
+
 import numpy as np
+import librosa
 
 # ------------------------------------------- CONSTANTS ------------------------------------------- #
 

@@ -1,3 +1,4 @@
+from termcolor import colored
 import pyaudio
 import wave
 
@@ -42,7 +43,7 @@ class AudioCapture:
         self.audio = pyaudio.PyAudio()
         self.stream = None
 
-    def start_recording(self):
+    def start_recording(self, verbose: bool = True):
         """Start the audio recording stream."""
         self.stream = self.audio.open(
             format=pyaudio.paInt16,
@@ -51,14 +52,18 @@ class AudioCapture:
             input=True,
             frames_per_buffer=self.chunk_size,
         )
-        print(
-            f"Recording started. Press Ctrl+C to stop manually or wait {self.duration} seconds..."
-        )
+
+        if verbose:
+            print(
+                colored(
+                    f"Recording started. Press Ctrl+C to stop manually or wait {self.duration} seconds...",
+                    color="yellow",
+                )
+            )
 
     def stop_recording(self):
         """Stop the audio recording stream."""
         if self.stream:
-            print("Recording stopped.")
             self.stream.stop_stream()
             self.stream.close()
             self.audio.terminate()
@@ -78,7 +83,7 @@ class AudioCapture:
 
         except KeyboardInterrupt:
             if verbose:
-                print("\nRecording manually interrupted.")
+                print(colored("\nRecording manually interrupted.", color="red"))
 
         finally:
             self.stop_recording()
@@ -90,4 +95,4 @@ class AudioCapture:
                 wf.writeframes(b"".join(frames))
 
             if verbose:
-                print(f"Audio recorded to {file_path}")
+                print(colored(f"Audio recorded to {file_path}", color="green"))

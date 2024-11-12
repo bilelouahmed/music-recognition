@@ -1,10 +1,12 @@
-import __init__
+import os
+from typing import List, Tuple, Any, Optional, Union
+from collections import Counter
+
 import psycopg2
 from psycopg2 import sql
-from typing import List, Tuple, Any, Optional
-from collections import Counter
-import os
-from models.song_fingerprint import SongHashPair, SongFingerprint
+
+import __init__
+from models.song_fingerprint import SongFingerprint
 
 
 class PostgresDatabase:
@@ -128,9 +130,9 @@ class FingerprintsDatabase(PostgresDatabase):
                 "title VARCHAR(50) NOT NULL",
                 "artists VARCHAR(50)",
                 "album VARCHAR(50)",
-                "lyrics TEXT",
-                "cover VARCHAR(100)",
-                "url VARCHAR(100)",
+                "lyrics VARCHAR(10000)",
+                "cover VARCHAR(500)",
+                "url VARCHAR(500)",
             ],
         )
 
@@ -204,7 +206,6 @@ class FingerprintsDatabase(PostgresDatabase):
         WHERE hash = ANY(%s)
         """
 
-        print(query_hashes)
         matching_rows = self.fetch_all(query, (query_hashes,))
 
         if not matching_rows:
@@ -223,3 +224,23 @@ class FingerprintsDatabase(PostgresDatabase):
             if second_best_match_song_id
             else best_match_song_id
         )
+
+    def get_song_details(self, song_title: str) -> Union[dict, None]:
+        """
+        Retrieves the details of a song based on its title.
+
+        :param song_title: The title of the song.
+        :return: A dictionary containing the song's details if it exists, else None.
+        """
+        query = "SELECT * FROM songs WHERE title = %s"
+        result = self.fetch_one(query, (song_title,))
+
+        if result:
+            return {
+                "title": result[1],
+                "artists": result[2],
+                "album": result[3],
+                "lyrics": result[4],
+                "cover": result[5],
+                "url": result[6],
+            }

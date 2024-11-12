@@ -1,4 +1,5 @@
 from typing import Tuple
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
@@ -9,6 +10,7 @@ from scipy.ndimage import (
     iterate_structure,
     binary_erosion,
 )
+
 from core.database import FingerprintsDatabase
 from models.song_fingerprint import SongHashPair, SongFingerprint
 
